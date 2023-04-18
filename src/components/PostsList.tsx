@@ -1,5 +1,3 @@
-import {useState, ChangeEvent} from "react";
-
 import classes from './PostsList.module.css'
 
 import {PostModel, PostsListModel} from "../model/postModel";
@@ -20,24 +18,12 @@ const posts: PostModel[] = [
 ];
 
 const PostsList = ({isPosting, onStopPosting}: PostsListModel) => {
-  const [enteredBody, setEnteredBody] = useState('');
-  const [enteredAuthor, setEnteredAuthor] = useState('');
-
-  const bodyChangeHandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
-    setEnteredBody(event.target.value);
-  }
-
-  const authorChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    setEnteredAuthor(event.target.value);
-  }
-
   return (
       <>
         {isPosting &&
             <Modal onClose={onStopPosting}>
               <NewPost
-                  onAuthorChange={authorChangeHandler}
-                  onBodyChange={bodyChangeHandler}/>
+                  onCancel={onStopPosting}/>
             </Modal>
         }
         <ul className={classes.posts}>
