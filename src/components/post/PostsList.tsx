@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {useState, useEffect} from "react";
 import axios from "axios";
 
 import classes from './PostsList.module.css'
@@ -9,12 +9,24 @@ import Post from "./Post";
 import NewPost from "./NewPost";
 import Modal from "../common/Modal";
 
+const URL = `${import.meta.env.VITE_DUMMY_URL}/${import.meta.env.VITE_DUMMY_DB}`;
+
 const PostsList = ({isPosting, onStopPosting}: PostsListModel) => {
   const [posts, setPosts] = useState<PostModel[]>([]);
 
+  useEffect(() => {
+    const axiosPosts = async () => {
+      const response = await axios.get(URL);
+
+      setPosts(response.data.posts);
+    }
+    axiosPosts().catch((error) => {
+      console.log(error);
+    });
+  }, []);
+
   const addPostHandler = async (post: PostModel) => {
-    const url = process.env.URL || '';
-    const response = await axios.post(url, post);
+    const response = await axios.post(URL, post);
 
     setPosts((prevPosts) => {
       return [post, ...prevPosts];
