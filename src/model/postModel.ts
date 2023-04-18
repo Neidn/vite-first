@@ -3,10 +3,6 @@ export interface PostModel {
   body: string;
 }
 
-export interface PostsListModel {
-  isPosting: boolean;
-  onStopPosting: () => void;
-}
 
 export interface NewPostModel {
   onAddPost: (post: PostModel) => void;

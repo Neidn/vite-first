@@ -3,10 +3,10 @@ import axios from "axios";
 
 import classes from './PostsList.module.css'
 
-import {PostModel, PostsListModel} from "../../model/postModel";
+import {PostModel} from "../../model/postModel";
 
 import Post from "./Post";
-import NewPost from "./NewPost";
+import NewPost from "../../routes/NewPost";
 import Modal from "../common/Modal";
 
 const httpInitState = {
@@ -31,7 +31,7 @@ const httpReducer = (state: any, action: any) => {
 
 const URL = `${import.meta.env.VITE_DUMMY_URL}/${import.meta.env.VITE_DUMMY_DB}`;
 
-const PostsList = ({isPosting, onStopPosting}: PostsListModel) => {
+const PostsList = () => {
   const [posts, setPosts] = useState<PostModel[]>([]);
   const [httpState, dispatchHttp] = useReducer(httpReducer, httpInitState);
 
@@ -62,13 +62,6 @@ const PostsList = ({isPosting, onStopPosting}: PostsListModel) => {
 
   return (
       <>
-        {isPosting &&
-            <Modal onClose={onStopPosting}>
-              <NewPost
-                  onAddPost={addPostHandler}
-                  onCancel={onStopPosting}/>
-            </Modal>
-        }
         {!httpState.isFetching && posts.length > 0 &&
             <ul className={classes.posts}>
               {posts.map((post, index) => (

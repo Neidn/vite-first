@@ -6,8 +6,8 @@ import './index.css'
 
 import RootLayout from "./routes/RootLayout";
 
-import App from "./App";
-import NewPost from "./components/post/NewPost";
+import Posts from "./routes/Posts";
+import NewPost from "./routes/NewPost";
 
 const router = createBrowserRouter([
   {
@@ -16,13 +16,15 @@ const router = createBrowserRouter([
     children: [
       {
         path: '',
-        element: <App/>,
-      },
-      {
-        path: 'create-post',
-        element: <NewPost onAddPost={() => {
-        }} onCancel={() => {
-        }}/>,
+        element: <Posts/>,
+        children: [
+          {
+            path: 'create-post',
+            element: <NewPost onAddPost={() => {
+            }} onCancel={() => {
+            }}/>,
+          },
+        ],
       },
     ],
   },
