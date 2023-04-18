@@ -1,4 +1,5 @@
 import {useState} from "react";
+import axios from "axios";
 
 import classes from './PostsList.module.css'
 
@@ -11,7 +12,10 @@ import Modal from "../common/Modal";
 const PostsList = ({isPosting, onStopPosting}: PostsListModel) => {
   const [posts, setPosts] = useState<PostModel[]>([]);
 
-  const addPostHandler = (post: PostModel) => {
+  const addPostHandler = async (post: PostModel) => {
+    const url = process.env.URL || '';
+    const response = await axios.post(url, post);
+
     setPosts((prevPosts) => {
       return [post, ...prevPosts];
     });
