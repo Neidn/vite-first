@@ -2,7 +2,7 @@ import {MdPostAdd, MdMessage} from 'react-icons/md';
 
 import classes from './MainHeader.module.css';
 
-import {MainHeaderModel} from "../model/MainHeaderModel";
+import {MainHeaderModel} from "../../model/MainHeaderModel";
 
 const MainHeader = ({onCreatePost}: MainHeaderModel) => (
     <header className={classes.header}>

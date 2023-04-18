@@ -1,8 +1,6 @@
-import {PropsWithChildren} from "react";
-
 import classes from './Modal.module.css';
 
-import {ModalModel} from "../model/ModalModel";
+import {ModalModel} from "../../model/ModalModel";
 
 const Modal = ({children, onClose}: ModalModel) => {
   return (

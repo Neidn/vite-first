@@ -2,7 +2,7 @@ import {ChangeEvent, useState} from "react";
 
 import classes from './NewPost.module.css';
 
-import {NewPostModel, PostModel} from "../model/postModel";
+import {NewPostModel, PostModel} from "../../model/postModel";
 
 const NewPost = ({onCancel, onAddPost}: NewPostModel) => {
   const [enteredBody, setEnteredBody] = useState('');
