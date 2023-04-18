@@ -1,3 +1,5 @@
+import {useState} from "react";
+
 import classes from './PostsList.module.css'
 
 import {PostModel, PostsListModel} from "../model/postModel";
@@ -6,23 +8,21 @@ import Post from "./Post";
 import NewPost from "./NewPost";
 import Modal from "./Modal";
 
-const posts: PostModel[] = [
-  {
-    author: 'Maximilian',
-    body: 'React.js is awesome',
-  },
-  {
-    author: 'Manuel',
-    body: 'Check out the full course!',
-  }
-];
-
 const PostsList = ({isPosting, onStopPosting}: PostsListModel) => {
+  const [posts, setPosts] = useState<PostModel[]>([]);
+
+  const addPostHandler = (post: PostModel) => {
+    setPosts((prevPosts) => {
+      return [post, ...prevPosts];
+    });
+  }
+
   return (
       <>
         {isPosting &&
             <Modal onClose={onStopPosting}>
               <NewPost
+                  onAddPost={addPostHandler}
                   onCancel={onStopPosting}/>
             </Modal>
         }

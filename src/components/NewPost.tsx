@@ -4,7 +4,7 @@ import classes from './NewPost.module.css';
 
 import {NewPostModel, PostModel} from "../model/postModel";
 
-const NewPost = ({onCancel}: NewPostModel) => {
+const NewPost = ({onCancel, onAddPost}: NewPostModel) => {
   const [enteredBody, setEnteredBody] = useState('');
   const [enteredAuthor, setEnteredAuthor] = useState('');
 
@@ -27,8 +27,7 @@ const NewPost = ({onCancel}: NewPostModel) => {
       author: enteredAuthor,
       body: enteredBody,
     };
-
-    console.log(postData);
+    onAddPost(postData);
     onCancel();
   }
 
