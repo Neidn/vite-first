@@ -1,6 +1,5 @@
 import {useState} from "react";
 
-import MainHeader from "./components/common/MainHeader";
 import PostsList from "./components/post/PostsList";
 
 const App = () => {
@@ -16,7 +15,6 @@ const App = () => {
 
   return (
       <>
-        <MainHeader onCreatePost={showModalHandler}/>
         <main>
           <PostsList
               isPosting={modalIsVisible}
