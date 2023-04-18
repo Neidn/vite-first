@@ -6,8 +6,6 @@ import classes from './PostsList.module.css'
 import {PostModel} from "../../model/postModel";
 
 import Post from "./Post";
-import NewPost from "../../routes/NewPost";
-import Modal from "../common/Modal";
 
 const httpInitState = {
   isFetching: false,

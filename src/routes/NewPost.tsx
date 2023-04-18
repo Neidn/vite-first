@@ -34,7 +34,7 @@ const NewPost = ({onCancel, onAddPost}: NewPostModel) => {
   }
 
   return (
-      <Modal onClose={()=>{}}>
+      <Modal>
         <form className={classes.form} onSubmit={submitHandler}>
           <p>
             <label htmlFor="body">Text</label>
