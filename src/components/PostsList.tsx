@@ -2,7 +2,7 @@ import {useState, ChangeEvent} from "react";
 
 import classes from './PostsList.module.css'
 
-import {PostModel} from "../model/postModel";
+import {PostModel, PostsListModel} from "../model/postModel";
 
 import Post from "./Post";
 import NewPost from "./NewPost";
@@ -19,14 +19,9 @@ const posts: PostModel[] = [
   }
 ];
 
-const PostsList = () => {
-  const [modalIsVisible, setModalIsVisible] = useState(true);
+const PostsList = ({isPosting, onStopPosting}: PostsListModel) => {
   const [enteredBody, setEnteredBody] = useState('');
   const [enteredAuthor, setEnteredAuthor] = useState('');
-
-  const hideModalHandler = () => {
-    setModalIsVisible(false);
-  }
 
   const bodyChangeHandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setEnteredBody(event.target.value);
@@ -38,8 +33,8 @@ const PostsList = () => {
 
   return (
       <>
-        {modalIsVisible &&
-            <Modal onClose={hideModalHandler}>
+        {isPosting &&
+            <Modal onClose={onStopPosting}>
               <NewPost
                   onAuthorChange={authorChangeHandler}
                   onBodyChange={bodyChangeHandler}/>
