@@ -1,4 +1,5 @@
 import {ChangeEvent, useState} from "react";
+import {Link} from "react-router-dom";
 
 import classes from './NewPost.module.css';
 
@@ -6,7 +7,7 @@ import Modal from "../components/common/Modal";
 import {NewPostModel, PostModel} from "../model/postModel";
 
 
-const NewPost = ({onCancel, onAddPost}: NewPostModel) => {
+const NewPost = ({onAddPost}: NewPostModel) => {
   const [enteredBody, setEnteredBody] = useState('');
   const [enteredAuthor, setEnteredAuthor] = useState('');
 
@@ -30,7 +31,6 @@ const NewPost = ({onCancel, onAddPost}: NewPostModel) => {
       body: enteredBody,
     };
     onAddPost(postData);
-    onCancel();
   }
 
   return (
@@ -53,7 +53,7 @@ const NewPost = ({onCancel, onAddPost}: NewPostModel) => {
                 required/>
           </p>
           <p className={classes.actions}>
-            <button type={'button'} onClick={onCancel}>Cancel</button>
+            <Link to={'..'}>Cancel</Link>
             <button type={'submit'}>Submit</button>
           </p>
         </form>

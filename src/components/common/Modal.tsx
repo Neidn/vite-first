@@ -7,7 +7,7 @@ import {ModalModel} from "../../model/ModalModel";
 const Modal = ({children}: ModalModel) => {
   const navigate = useNavigate();
   const closeHandler = () => {
-    navigate('/');
+    navigate('..');
   };
 
   return (

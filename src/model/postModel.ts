@@ -6,5 +6,4 @@ export interface PostModel {
 
 export interface NewPostModel {
   onAddPost: (post: PostModel) => void;
-  onCancel: () => void;
 }
