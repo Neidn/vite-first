@@ -2,10 +2,14 @@ import {PropsWithChildren} from "react";
 
 import classes from './Modal.module.css';
 
-const Modal = ({children}: PropsWithChildren) => {
+import {ModalModel} from "../model/ModalModel";
+
+const Modal = ({children, onClose}: ModalModel) => {
   return (
       <>
-        <div className={classes.backdrop}/>
+        <div
+            className={classes.backdrop}
+            onClick={onClose}/>
         <dialog
             className={classes.modal}
             open={true}>

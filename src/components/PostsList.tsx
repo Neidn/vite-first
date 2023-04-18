@@ -20,8 +20,13 @@ const posts: PostModel[] = [
 ];
 
 const PostsList = () => {
+  const [modalIsVisible, setModalIsVisible] = useState(true);
   const [enteredBody, setEnteredBody] = useState('');
   const [enteredAuthor, setEnteredAuthor] = useState('');
+
+  const hideModalHandler = () => {
+    setModalIsVisible(false);
+  }
 
   const bodyChangeHandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setEnteredBody(event.target.value);
@@ -33,11 +38,13 @@ const PostsList = () => {
 
   return (
       <>
-        <Modal>
-          <NewPost
-              onAuthorChange={authorChangeHandler}
-              onBodyChange={bodyChangeHandler}/>
-        </Modal>
+        {modalIsVisible &&
+            <Modal onClose={hideModalHandler}>
+              <NewPost
+                  onAuthorChange={authorChangeHandler}
+                  onBodyChange={bodyChangeHandler}/>
+            </Modal>
+        }
         <ul className={classes.posts}>
           {posts.map((post, index) => (
               <Post key={index} author={post.author} body={post.body}/>
