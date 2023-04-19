@@ -1,9 +1,5 @@
 export interface PostModel {
+  id: string;
   author: string;
   body: string;
-}
-
-
-export interface NewPostModel {
-  onAddPost: (post: PostModel) => void;
 }

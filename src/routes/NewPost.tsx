@@ -1,64 +1,54 @@
-import {ChangeEvent, useState} from "react";
-import {Link} from "react-router-dom";
+import {Link, Form, ActionFunctionArgs, redirect} from "react-router-dom";
+import axios from "axios";
 
 import classes from './NewPost.module.css';
 
 import Modal from "../components/common/Modal";
-import {NewPostModel, PostModel} from "../model/postModel";
+import {PostModel} from "../model/postModel";
 
+const URL = `${import.meta.env.VITE_DUMMY_URL}/${import.meta.env.VITE_DUMMY_DB}`;
 
-const NewPost = ({onAddPost}: NewPostModel) => {
-  const [enteredBody, setEnteredBody] = useState('');
-  const [enteredAuthor, setEnteredAuthor] = useState('');
-
-  const bodyChangeHandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
-    event.preventDefault();
-
-    setEnteredBody(event.target.value);
-  }
-
-  const authorChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    event.preventDefault();
-
-    setEnteredAuthor(event.target.value);
-  }
-
-  const submitHandler = (event: ChangeEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
-    const postData: PostModel = {
-      author: enteredAuthor,
-      body: enteredBody,
-    };
-    onAddPost(postData);
-  }
+const NewPost = () => {
 
   return (
       <Modal>
-        <form className={classes.form} onSubmit={submitHandler}>
+        <Form method={'post'} className={classes.form}>
           <p>
             <label htmlFor="body">Text</label>
             <textarea
                 id="body"
+                name={'body'}
                 rows={3}
-                onChange={bodyChangeHandler}
                 required/>
           </p>
           <p>
-            <label htmlFor="name">Your name</label>
+            <label htmlFor="author">Your name</label>
             <input
                 type="text"
-                id="name"
-                onChange={authorChangeHandler}
+                id="author"
+                name={'author'}
                 required/>
           </p>
           <p className={classes.actions}>
             <Link to={'..'}>Cancel</Link>
             <button type={'submit'}>Submit</button>
           </p>
-        </form>
+        </Form>
       </Modal>
   );
 };
 
 export default NewPost;
+
+export const action = async ({request}: ActionFunctionArgs) => {
+  const formData = await request.formData();
+
+  const postData: PostModel = {
+    body: formData.get('body') as string,
+    author: formData.get('author') as string,
+  };
+
+  await axios.post(URL, postData);
+
+  return redirect('/');
+}

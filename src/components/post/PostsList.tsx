@@ -14,7 +14,11 @@ const PostsList = () => {
         {posts.length > 0 &&
             <ul className={classes.posts}>
               {posts.map((post, index) => (
-                  <Post key={index} author={post.author} body={post.body}/>
+                  <Post
+                      key={index}
+                      id={post.id}
+                      author={post.author}
+                      body={post.body}/>
               ))}
             </ul>
         }
